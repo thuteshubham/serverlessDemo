@@ -128,25 +128,25 @@ const getActiveInventory = async(event,context)=> {
         for (let key in activeInventories) {
             delete activeInventories[key].StartTimeEpoch;
         }
-        // responsemodel.status = Appconst.STATUS_CODE_SUCCESS;
-        // responsemodel.data = activeInventories;
-        // responsemodel.message = Appconst.MESSAGE_SUCCESS;
+        responsemodel.status = Appconst.STATUS_CODE_SUCCESS;
+        responsemodel.data = activeInventories;
+        responsemodel.message = Appconst.MESSAGE_SUCCESS;
         // return JSON.stringify(responsemodel)
         const response = {
             statusCode: 200,
-            body: JSON.stringify(activeInventories) 
+            body: JSON.stringify(responsemodel) 
         };
         return response;
    
     } catch (err) {
         console.log(err);
-        // responsemodel.status = Appconst.STATUS_CODE_DATABASE_ERROR;
-        // responsemodel.data = Appconst.NULL_DATA;
-        // responsemodel.message = Appconst.MESSAGE_DATABASE_ERROR;
+        responsemodel.status = Appconst.STATUS_CODE_DATABASE_ERROR;
+        responsemodel.data = Appconst.NULL_DATA;
+        responsemodel.message = Appconst.MESSAGE_DATABASE_ERROR;
 
         const errorMessage={
             statusCode: 503,
-            body: JSON.stringify(err)
+            body: JSON.stringify(responsemodel)
           }
           return errorMessage
     }

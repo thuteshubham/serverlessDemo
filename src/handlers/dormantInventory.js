@@ -66,25 +66,25 @@ const getDormantInventory = async (event,context) => {
         for (let key in dormantInventories) {
             delete dormantInventories[key].LastActiveEpoch;
         }
-        // responsemodel.status = Appconst.STATUS_CODE_SUCCESS;
-        // responsemodel.data = dormantInventories;
-        // responsemodel.message = Appconst.MESSAGE_SUCCESS;
+        responsemodel.status = Appconst.STATUS_CODE_SUCCESS;
+        responsemodel.data = dormantInventories;
+        responsemodel.message = Appconst.MESSAGE_SUCCESS;
         // return res.json(responsemodel);
         const response = {
             statusCode: 200,
-            body: JSON.stringify(dormantInventories) 
+            body: JSON.stringify(responsemodel) 
         };
         return response;
     } catch (err) {
         console.log(err);
-        // responsemodel.status = Appconst.STATUS_CODE_DATABASE_ERROR;
-        // responsemodel.data = Appconst.NULL_DATA;
-        // responsemodel.message = Appconst.MESSAGE_DATABASE_ERROR;
+        responsemodel.status = Appconst.STATUS_CODE_DATABASE_ERROR;
+        responsemodel.data = Appconst.NULL_DATA;
+        responsemodel.message = Appconst.MESSAGE_DATABASE_ERROR;
         // return res.json(responsemodel);
        
         const errorMessage={
             statusCode: 503,
-            body: JSON.stringify(err)
+            body: JSON.stringify(responsemodel)
           }
           return errorMessage
     }

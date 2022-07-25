@@ -26,7 +26,7 @@ functions:
     events:   
       - http:
           path: /hello
-          method: get
+          method: post
 
 
   hello2:
@@ -61,9 +61,37 @@ functions:
           path: /dormantInventory
           method: get
 
+  activeLocoInfo:
+    handler: src/handlers/activeLocoInfo.handler
+    events:   
+      - http:
+          path: /activeLocoInfo
+          method: get
 
           
+          
+  getImportRoute:
+    handler: src/handlers/getImportRoute.handler
+    events:   
+      - http:
+          path: /getImportRoute
+          method: get
 
+  getRouteInfo:
+    handler: src/handlers/getRouteInfo.handler
+    events:   
+      - http:
+          path: /getRouteInfo
+          method: get
+
+  postCreateLocoCarRoute:
+    handler: src/handlers/postCreateLocoCarRoute.handler
+    events:   
+      - http:
+          path: /postCreateLocoCarRoute
+          method: post
+
+          
 # resources:
 #   Resources:
 #     MSsqlDatabase:

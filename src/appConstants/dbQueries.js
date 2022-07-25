@@ -38,7 +38,8 @@ const dbQuery = {
     FROM dbo.Inventory
     LEFT JOIN dbo.LocoCarRouteMapping
     ON dbo.Inventory.InventoryID = dbo.LocoCarRouteMapping.InventoryID 
-    where dbo.Inventory.Category=${category} and dbo.Inventory.CurrentStatus=${current_status_active} and dbo.Inventory.IsDeleted=${is_deleted_no} and  dbo.LocoCarRouteMapping.IsDeleted=${is_deleted_no}`
+    where dbo.Inventory.Category=${category} and dbo.Inventory.CurrentStatus=${current_status_active} and dbo.Inventory.IsDeleted=${is_deleted_no} and  dbo.LocoCarRouteMapping.IsDeleted=${is_deleted_no}`,
+    GET_LAST_JOURNEY1:() => `select TOP 1 * from dbo.LocoCarRouteMapping ORDER BY JourneyID DESC` 
 }
 
 

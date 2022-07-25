@@ -113,6 +113,30 @@
               "LogGroupName": "/aws/lambda/aws-node-http-api-project-dev-dormantInventory"
             }
           },
+          "ActiveLocoInfoLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/aws-node-http-api-project-dev-activeLocoInfo"
+            }
+          },
+          "GetImportRouteLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/aws-node-http-api-project-dev-getImportRoute"
+            }
+          },
+          "GetRouteInfoLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/aws-node-http-api-project-dev-getRouteInfo"
+            }
+          },
+          "PostCreateLocoCarRouteLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/aws-node-http-api-project-dev-postCreateLocoCarRoute"
+            }
+          },
           "IamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -197,7 +221,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-node-http-api-project/dev/1658576485168-2022-07-23T11:41:25.168Z/aws-node-http-api-project.zip"
+                "S3Key": "serverless/aws-node-http-api-project/dev/1658745820699-2022-07-25T10:43:40.699Z/aws-node-http-api-project.zip"
               },
               "Handler": "src/handlers/hello.handler",
               "Runtime": "nodejs14.x",
@@ -222,7 +246,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-node-http-api-project/dev/1658576485168-2022-07-23T11:41:25.168Z/aws-node-http-api-project.zip"
+                "S3Key": "serverless/aws-node-http-api-project/dev/1658745820699-2022-07-25T10:43:40.699Z/aws-node-http-api-project.zip"
               },
               "Handler": "src/handlers/hello2.handler",
               "Runtime": "nodejs14.x",
@@ -247,7 +271,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-node-http-api-project/dev/1658576485168-2022-07-23T11:41:25.168Z/aws-node-http-api-project.zip"
+                "S3Key": "serverless/aws-node-http-api-project/dev/1658745820699-2022-07-25T10:43:40.699Z/aws-node-http-api-project.zip"
               },
               "Handler": "src/handlers/hello3.handler",
               "Runtime": "nodejs14.x",
@@ -272,7 +296,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-node-http-api-project/dev/1658576485168-2022-07-23T11:41:25.168Z/aws-node-http-api-project.zip"
+                "S3Key": "serverless/aws-node-http-api-project/dev/1658745820699-2022-07-25T10:43:40.699Z/aws-node-http-api-project.zip"
               },
               "Handler": "src/handlers/activeInventory.handler",
               "Runtime": "nodejs14.x",
@@ -297,7 +321,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-node-http-api-project/dev/1658576485168-2022-07-23T11:41:25.168Z/aws-node-http-api-project.zip"
+                "S3Key": "serverless/aws-node-http-api-project/dev/1658745820699-2022-07-25T10:43:40.699Z/aws-node-http-api-project.zip"
               },
               "Handler": "src/handlers/dormantInventory.handler",
               "Runtime": "nodejs14.x",
@@ -315,54 +339,194 @@
               "DormantInventoryLogGroup"
             ]
           },
-          "HelloLambdaVersionleC07KCbplREvznLEjkIztnC8VKJCFCrzdlFDsbajyM": {
+          "ActiveLocoInfoLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/aws-node-http-api-project/dev/1658745820699-2022-07-25T10:43:40.699Z/aws-node-http-api-project.zip"
+              },
+              "Handler": "src/handlers/activeLocoInfo.handler",
+              "Runtime": "nodejs14.x",
+              "FunctionName": "aws-node-http-api-project-dev-activeLocoInfo",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "ActiveLocoInfoLogGroup"
+            ]
+          },
+          "GetImportRouteLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/aws-node-http-api-project/dev/1658745820699-2022-07-25T10:43:40.699Z/aws-node-http-api-project.zip"
+              },
+              "Handler": "src/handlers/getImportRoute.handler",
+              "Runtime": "nodejs14.x",
+              "FunctionName": "aws-node-http-api-project-dev-getImportRoute",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetImportRouteLogGroup"
+            ]
+          },
+          "GetRouteInfoLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/aws-node-http-api-project/dev/1658745820699-2022-07-25T10:43:40.699Z/aws-node-http-api-project.zip"
+              },
+              "Handler": "src/handlers/getRouteInfo.handler",
+              "Runtime": "nodejs14.x",
+              "FunctionName": "aws-node-http-api-project-dev-getRouteInfo",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetRouteInfoLogGroup"
+            ]
+          },
+          "PostCreateLocoCarRouteLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/aws-node-http-api-project/dev/1658745820699-2022-07-25T10:43:40.699Z/aws-node-http-api-project.zip"
+              },
+              "Handler": "src/handlers/postCreateLocoCarRoute.handler",
+              "Runtime": "nodejs14.x",
+              "FunctionName": "aws-node-http-api-project-dev-postCreateLocoCarRoute",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "PostCreateLocoCarRouteLogGroup"
+            ]
+          },
+          "HelloLambdaVersionRkTC09mREGkB5jAqNDf2lY3OPqampR1gXeF7ycBcnU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HelloLambdaFunction"
               },
-              "CodeSha256": "Gh5TydRWX1bRdEvchn5bbg3qxIBdp7EGYtw6dgIJAos="
+              "CodeSha256": "nAwr+ZytqKR98s0PoKZqGwjGkzDRrUbeginI8IHx/ds="
             }
           },
-          "Hello2LambdaVersionrUp2HDWTfro1RZOu16xmTQZqNbCiwTJI0uC4DA53Y": {
+          "Hello2LambdaVersionoe00fgrolSguby9bVf6zH2ZiS0JDbxY0Z2VneTFnA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "Hello2LambdaFunction"
               },
-              "CodeSha256": "Gh5TydRWX1bRdEvchn5bbg3qxIBdp7EGYtw6dgIJAos="
+              "CodeSha256": "nAwr+ZytqKR98s0PoKZqGwjGkzDRrUbeginI8IHx/ds="
             }
           },
-          "Hello3LambdaVersionvZO6fOzHQTu37FpDWNPhacBikRY6GT1RpzAXgL1H2c": {
+          "Hello3LambdaVersionvfdettPhCtcUUhsatYYFNar5W3iasftno0HTdPIieF8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "Hello3LambdaFunction"
               },
-              "CodeSha256": "Gh5TydRWX1bRdEvchn5bbg3qxIBdp7EGYtw6dgIJAos="
+              "CodeSha256": "nAwr+ZytqKR98s0PoKZqGwjGkzDRrUbeginI8IHx/ds="
             }
           },
-          "ActiveInventoryLambdaVersionBfgiXuJJpZ9LQJDfwjJBS1OoeoKmzyfAb8G2muoEA4": {
+          "ActiveInventoryLambdaVersionQAxxY6gJJ8evGPbiuImzeD0R3d8iTvfSKXDHDQTao": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ActiveInventoryLambdaFunction"
               },
-              "CodeSha256": "Gh5TydRWX1bRdEvchn5bbg3qxIBdp7EGYtw6dgIJAos="
+              "CodeSha256": "nAwr+ZytqKR98s0PoKZqGwjGkzDRrUbeginI8IHx/ds="
             }
           },
-          "DormantInventoryLambdaVersionsOSzowTDmT7uo7r50yrAlzfw66gU2OfCVnVJgAW0": {
+          "DormantInventoryLambdaVersion3gyad1XmKXM7wY5NLniodzi47EGat3WywKXYS6pLy3w": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "DormantInventoryLambdaFunction"
               },
-              "CodeSha256": "Gh5TydRWX1bRdEvchn5bbg3qxIBdp7EGYtw6dgIJAos="
+              "CodeSha256": "nAwr+ZytqKR98s0PoKZqGwjGkzDRrUbeginI8IHx/ds="
+            }
+          },
+          "ActiveLocoInfoLambdaVersionUJQgDCggSbzaxgq7EEmhgY2WEx1z06AmstvfF5QE": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "ActiveLocoInfoLambdaFunction"
+              },
+              "CodeSha256": "nAwr+ZytqKR98s0PoKZqGwjGkzDRrUbeginI8IHx/ds="
+            }
+          },
+          "GetImportRouteLambdaVersionwcITP3MrDGZH3bnNr9oX3W3ryDld7yU3BYgBU5vTck": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetImportRouteLambdaFunction"
+              },
+              "CodeSha256": "nAwr+ZytqKR98s0PoKZqGwjGkzDRrUbeginI8IHx/ds="
+            }
+          },
+          "GetRouteInfoLambdaVersionWAE1jpvjRD63004gEQ9SjG0eqktaFJoJh22SKJlSpo": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetRouteInfoLambdaFunction"
+              },
+              "CodeSha256": "nAwr+ZytqKR98s0PoKZqGwjGkzDRrUbeginI8IHx/ds="
+            }
+          },
+          "PostCreateLocoCarRouteLambdaVersionhDdzsSERhbFBHtve5QsvtHB3St1OQj7oPA5E8mHI3U": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "PostCreateLocoCarRouteLambdaFunction"
+              },
+              "CodeSha256": "nAwr+ZytqKR98s0PoKZqGwjGkzDRrUbeginI8IHx/ds="
             }
           },
           "ApiGatewayRestApi": {
@@ -464,10 +628,70 @@
               }
             }
           },
-          "ApiGatewayMethodHelloGet": {
+          "ApiGatewayResourceActivelocoinfo": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "activeLocoInfo",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceGetimportroute": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "getImportRoute",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceGetrouteinfo": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "getRouteInfo",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourcePostcreatelococarroute": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "postCreateLocoCarRoute",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodHelloPost": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
-              "HttpMethod": "GET",
+              "HttpMethod": "POST",
               "RequestParameters": {},
               "ResourceId": {
                 "Ref": "ApiGatewayResourceHello"
@@ -740,7 +964,191 @@
               "DormantInventoryLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1658576463198": {
+          "ApiGatewayMethodActivelocoinfoGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceActivelocoinfo"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "ActiveLocoInfoLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "ActiveLocoInfoLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodGetimportrouteGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceGetimportroute"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GetImportRouteLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "GetImportRouteLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodGetrouteinfoGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceGetrouteinfo"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GetRouteInfoLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "GetRouteInfoLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodPostcreatelococarroutePost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourcePostcreatelococarroute"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "PostCreateLocoCarRouteLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "PostCreateLocoCarRouteLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayDeployment1658745786142": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -749,12 +1157,16 @@
               "StageName": "dev"
             },
             "DependsOn": [
-              "ApiGatewayMethodHelloGet",
+              "ApiGatewayMethodHelloPost",
               "ApiGatewayMethodHello2Get",
               "ApiGatewayMethodHello2ProxyVarAny",
               "ApiGatewayMethodHello3Get",
               "ApiGatewayMethodActiveinventoryGet",
-              "ApiGatewayMethodDormantinventoryGet"
+              "ApiGatewayMethodDormantinventoryGet",
+              "ApiGatewayMethodActivelocoinfoGet",
+              "ApiGatewayMethodGetimportrouteGet",
+              "ApiGatewayMethodGetrouteinfoGet",
+              "ApiGatewayMethodPostcreatelococarroutePost"
             ]
           },
           "HelloLambdaPermissionApiGateway": {
@@ -941,6 +1353,154 @@
                 ]
               }
             }
+          },
+          "ActiveLocoInfoLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "ActiveLocoInfoLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "GetImportRouteLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetImportRouteLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "GetRouteInfoLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetRouteInfoLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "PostCreateLocoCarRouteLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "PostCreateLocoCarRouteLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
           }
         },
         "Outputs": {
@@ -955,7 +1515,7 @@
           "HelloLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersionleC07KCbplREvznLEjkIztnC8VKJCFCrzdlFDsbajyM"
+              "Ref": "HelloLambdaVersionRkTC09mREGkB5jAqNDf2lY3OPqampR1gXeF7ycBcnU"
             },
             "Export": {
               "Name": "sls-aws-node-http-api-project-dev-HelloLambdaFunctionQualifiedArn"
@@ -964,7 +1524,7 @@
           "Hello2LambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "Hello2LambdaVersionrUp2HDWTfro1RZOu16xmTQZqNbCiwTJI0uC4DA53Y"
+              "Ref": "Hello2LambdaVersionoe00fgrolSguby9bVf6zH2ZiS0JDbxY0Z2VneTFnA"
             },
             "Export": {
               "Name": "sls-aws-node-http-api-project-dev-Hello2LambdaFunctionQualifiedArn"
@@ -973,7 +1533,7 @@
           "Hello3LambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "Hello3LambdaVersionvZO6fOzHQTu37FpDWNPhacBikRY6GT1RpzAXgL1H2c"
+              "Ref": "Hello3LambdaVersionvfdettPhCtcUUhsatYYFNar5W3iasftno0HTdPIieF8"
             },
             "Export": {
               "Name": "sls-aws-node-http-api-project-dev-Hello3LambdaFunctionQualifiedArn"
@@ -982,7 +1542,7 @@
           "ActiveInventoryLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ActiveInventoryLambdaVersionBfgiXuJJpZ9LQJDfwjJBS1OoeoKmzyfAb8G2muoEA4"
+              "Ref": "ActiveInventoryLambdaVersionQAxxY6gJJ8evGPbiuImzeD0R3d8iTvfSKXDHDQTao"
             },
             "Export": {
               "Name": "sls-aws-node-http-api-project-dev-ActiveInventoryLambdaFunctionQualifiedArn"
@@ -991,10 +1551,46 @@
           "DormantInventoryLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DormantInventoryLambdaVersionsOSzowTDmT7uo7r50yrAlzfw66gU2OfCVnVJgAW0"
+              "Ref": "DormantInventoryLambdaVersion3gyad1XmKXM7wY5NLniodzi47EGat3WywKXYS6pLy3w"
             },
             "Export": {
               "Name": "sls-aws-node-http-api-project-dev-DormantInventoryLambdaFunctionQualifiedArn"
+            }
+          },
+          "ActiveLocoInfoLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "ActiveLocoInfoLambdaVersionUJQgDCggSbzaxgq7EEmhgY2WEx1z06AmstvfF5QE"
+            },
+            "Export": {
+              "Name": "sls-aws-node-http-api-project-dev-ActiveLocoInfoLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetImportRouteLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetImportRouteLambdaVersionwcITP3MrDGZH3bnNr9oX3W3ryDld7yU3BYgBU5vTck"
+            },
+            "Export": {
+              "Name": "sls-aws-node-http-api-project-dev-GetImportRouteLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetRouteInfoLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetRouteInfoLambdaVersionWAE1jpvjRD63004gEQ9SjG0eqktaFJoJh22SKJlSpo"
+            },
+            "Export": {
+              "Name": "sls-aws-node-http-api-project-dev-GetRouteInfoLambdaFunctionQualifiedArn"
+            }
+          },
+          "PostCreateLocoCarRouteLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "PostCreateLocoCarRouteLambdaVersionhDdzsSERhbFBHtve5QsvtHB3St1OQj7oPA5E8mHI3U"
+            },
+            "Export": {
+              "Name": "sls-aws-node-http-api-project-dev-PostCreateLocoCarRouteLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -1121,7 +1717,7 @@
           {
             "http": {
               "path": "hello",
-              "method": "get",
+              "method": "post",
               "integration": "AWS_PROXY"
             }
           }
@@ -1132,7 +1728,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "HelloLambdaVersionleC07KCbplREvznLEjkIztnC8VKJCFCrzdlFDsbajyM"
+        "versionLogicalId": "HelloLambdaVersionRkTC09mREGkB5jAqNDf2lY3OPqampR1gXeF7ycBcnU"
       },
       "hello2": {
         "handler": "src/handlers/hello2.handler",
@@ -1158,7 +1754,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "Hello2LambdaVersionrUp2HDWTfro1RZOu16xmTQZqNbCiwTJI0uC4DA53Y"
+        "versionLogicalId": "Hello2LambdaVersionoe00fgrolSguby9bVf6zH2ZiS0JDbxY0Z2VneTFnA"
       },
       "hello3": {
         "handler": "src/handlers/hello3.handler",
@@ -1177,7 +1773,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "Hello3LambdaVersionvZO6fOzHQTu37FpDWNPhacBikRY6GT1RpzAXgL1H2c"
+        "versionLogicalId": "Hello3LambdaVersionvfdettPhCtcUUhsatYYFNar5W3iasftno0HTdPIieF8"
       },
       "activeInventory": {
         "handler": "src/handlers/activeInventory.handler",
@@ -1196,7 +1792,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "ActiveInventoryLambdaVersionBfgiXuJJpZ9LQJDfwjJBS1OoeoKmzyfAb8G2muoEA4"
+        "versionLogicalId": "ActiveInventoryLambdaVersionQAxxY6gJJ8evGPbiuImzeD0R3d8iTvfSKXDHDQTao"
       },
       "dormantInventory": {
         "handler": "src/handlers/dormantInventory.handler",
@@ -1215,7 +1811,83 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "DormantInventoryLambdaVersionsOSzowTDmT7uo7r50yrAlzfw66gU2OfCVnVJgAW0"
+        "versionLogicalId": "DormantInventoryLambdaVersion3gyad1XmKXM7wY5NLniodzi47EGat3WywKXYS6pLy3w"
+      },
+      "activeLocoInfo": {
+        "handler": "src/handlers/activeLocoInfo.handler",
+        "events": [
+          {
+            "http": {
+              "path": "activeLocoInfo",
+              "method": "get",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "aws-node-http-api-project-dev-activeLocoInfo",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs14.x",
+        "vpc": {},
+        "versionLogicalId": "ActiveLocoInfoLambdaVersionUJQgDCggSbzaxgq7EEmhgY2WEx1z06AmstvfF5QE"
+      },
+      "getImportRoute": {
+        "handler": "src/handlers/getImportRoute.handler",
+        "events": [
+          {
+            "http": {
+              "path": "getImportRoute",
+              "method": "get",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "aws-node-http-api-project-dev-getImportRoute",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs14.x",
+        "vpc": {},
+        "versionLogicalId": "GetImportRouteLambdaVersionwcITP3MrDGZH3bnNr9oX3W3ryDld7yU3BYgBU5vTck"
+      },
+      "getRouteInfo": {
+        "handler": "src/handlers/getRouteInfo.handler",
+        "events": [
+          {
+            "http": {
+              "path": "getRouteInfo",
+              "method": "get",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "aws-node-http-api-project-dev-getRouteInfo",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs14.x",
+        "vpc": {},
+        "versionLogicalId": "GetRouteInfoLambdaVersionWAE1jpvjRD63004gEQ9SjG0eqktaFJoJh22SKJlSpo"
+      },
+      "postCreateLocoCarRoute": {
+        "handler": "src/handlers/postCreateLocoCarRoute.handler",
+        "events": [
+          {
+            "http": {
+              "path": "postCreateLocoCarRoute",
+              "method": "post",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "aws-node-http-api-project-dev-postCreateLocoCarRoute",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs14.x",
+        "vpc": {},
+        "versionLogicalId": "PostCreateLocoCarRouteLambdaVersionhDdzsSERhbFBHtve5QsvtHB3St1OQj7oPA5E8mHI3U"
       }
     },
     "configValidationMode": "warn",
@@ -1244,7 +1916,7 @@
     "artifact": "D:\\serverless\\serverless-aws1\\aws-node-http-api-project\\.serverless\\aws-node-http-api-project.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/aws-node-http-api-project/dev/1658576485168-2022-07-23T11:41:25.168Z",
+    "artifactDirectoryName": "serverless/aws-node-http-api-project/dev/1658745820699-2022-07-25T10:43:40.699Z",
     "artifact": "aws-node-http-api-project.zip"
   }
 }
