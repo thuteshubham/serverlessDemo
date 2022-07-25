@@ -1,0 +1,98 @@
+service: aws-node-http-api-project
+
+disabledDeprecations:
+   - '*'
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-west-2
+  # iamRoleStatements:
+  #   - Effect: Allow
+  #     Action:
+  #       - dynamodb:*
+  #       - RDS:*
+  #     Resource:
+  #       - arn:aws:rds:us-west-2:392664342342:db:database-1
+
+plugins:
+  - serverless-plugin-common-excludes 
+  - serverless-plugin-include-dependencies
+
+functions:
+  hello:
+    handler: src/handlers/hello.handler
+    events:   
+      - http:
+          path: /hello
+          method: get
+
+
+  hello2:
+    handler: src/handlers/hello2.handler
+    events:   
+      - http:
+          path: /hello2
+          method: get
+      - http:
+          path: /hello2/{proxy+}
+          method: any
+  
+  hello3:
+    handler: src/handlers/hello3.handler
+    events:   
+      - http:
+          path: /hello3
+          method: get
+
+
+  activeInventory:
+    handler: src/handlers/activeInventory.handler
+    events:   
+      - http:
+          path: /activeInventory
+          method: get
+  
+  dormantInventory:
+    handler: src/handlers/dormantInventory.handler
+    events:   
+      - http:
+          path: /dormantInventory
+          method: get
+
+
+          
+
+# resources:
+#   Resources:
+#     MSsqlDatabase:
+#       Type: AWS::RDS::Mysql::Railcar2
+#       Properties:
+#         TableName: Inventory
+#         BillingMode: PAY_PER_REQUEST
+#         AttributeDefinitions: 
+#           - AttributeName: id
+#             KeyType: HASH  
+#         KeySchema:
+#           - AttributeName: id
+#             KeyType: HASH
+
+
+# Resources:
+#   RDSCluster:
+#     Type: AWS::RDS::DBCluster
+#     Properties:
+#       MasterUsername: admin
+#       MasterUserPassword: Durga12345
+#       DatabaseName: SQLServer
+#       Engine: SQL Server Express Edition
+#       EngineMode: serverless
+#       ScalingConfiguration:
+#         AutoPause: true
+#         MaxCapacity: 2
+#         MinCapacity: 1
+#         SecondsUntilAutoPause: 300
+#       EnableHttpEndpoint: true
+#       StorageEncrypted: true
+         
